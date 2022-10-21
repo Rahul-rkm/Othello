@@ -1,10 +1,10 @@
 // import botMove from "./app.js";
 // botMove()
-
 // 1. get all the elements 
 //    header, player-points, bot-points, grid-items, modal, action-button
 const playerPoints = document.querySelector("#player-points");
 const botPoints = document.querySelector("#bot-points");
+const turn = document.querySelector("#turn");
 const gridItems = document.querySelectorAll(".board-grid-items");
 const modal = document.querySelector("#modal");
 const modalAction = document.querySelector("#modal-action");
@@ -45,6 +45,7 @@ playerPoints.innerText += ` ${cards[0]}`;
 botPoints.innerText += ` ${cards[1]}`;
 
 function render() {
+    turn.innerText = (playerTurn === 0) ? "Player's 😀 turn" : "Bot's 🤖 turn"
     gridItems.forEach(tile => {
         // console.log(parseInt(tile.id.slice(4)));
         let [row, column] = idToCord(parseInt(tile.id.slice(4)));
@@ -71,7 +72,7 @@ const isValidMove = (id) => {
     let [row, column] = idToCord(id);
     let tilesToFlip = [];
     /// Directions : Top, TRC, RIGHT, BRC, Bottom, BLC, Left, TLC
-    let directions = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [-1, -1], [0, -1], [-1, -1]];
+    let directions = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]];
     let i = row - 1; let j = column - 1;
     if (board[i][j] !== ' ') return [];
     directions.forEach(dir => {
@@ -116,11 +117,6 @@ const getValidMoves = async (board) => {
     return [validMoves, bestMove];
 }
 
-// 
-// let [moves, best] = await getValidMoves(board);
-// console.log(moves)
-// console.log(best)
-// console.log(idToCord(21));
 
 // Player's move handler => Part of MODEL : modifies the state. 
 const playerMoveHandler = (id) => {
@@ -133,22 +129,27 @@ const playerMoveHandler = (id) => {
         tilesToFlip.forEach(tile => {
             board[tile[0]][tile[1]] = cards[playerTurn];
         })
+        switchTurn();
     }
     else {
-        alert('😑 Wrong move (not allowed). Plz play correct move. (See ? : Help)')
+        alert('😑 Wrong move (not allowed). Plz play correct move. (See ? : Help)');
     }
 }
+
+const updateScore = () => {
+    let count = [0, 0];
+
+}
+
 
 // CONTROLLER ⚙️🛠️
 
 const ClickHandler = (e) => {
+    // check if bot has clicked or not
+    // if(playerTurn!== 0) return;
     let id = parseInt(e.target.id.slice(4));
-    // console.log(e.target);
-    // console.log(e.target.id);
-    // console.log(id);
     playerMoveHandler(id);
     console.log(board);
-    switchTurn();
     render();
     // botMoveHandler()
     // switchTurn();
@@ -156,9 +157,18 @@ const ClickHandler = (e) => {
 
 }
 
+
+// Animate the bgcolor if innerContent changes
+function changimation(e) {
+    e.target.classList.add('changimate');
+    setTimeout(() => {
+        e.target.classList.remove('changimate')
+    }, 1000);
+}
 gridItems.forEach(item => {
     // let id = item.id.slice(4);
     // console.log(id);
+    item.addEventListener('click', changimation);
     item.addEventListener('click', ClickHandler);
 }
 );

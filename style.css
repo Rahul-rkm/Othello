@@ -37,7 +37,7 @@
     outline: none;
     /* border: none; */
     border: 1px solid white;
-    transition: all 0.75s;
+    transition: all 0.05s;
 }
 
 .board-grid-items:hover {
@@ -112,4 +112,23 @@
 
 .o {
     background-color: rgb(102, 24, 204);
+}
+
+.changimate {
+    animation: bganimate 1s ease 0ms;
+}
+
+@keyframes bganimate {
+    0% {
+        background-color: #35b1e4;
+    }
+
+    50% {
+        background-color: #8e51f8;
+    }
+
+    100% {
+        background-color: #35b1e4;
+    }
+
 }

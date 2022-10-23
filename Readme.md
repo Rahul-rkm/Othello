@@ -1,6 +1,6 @@
 # Othello
 
-![gif](./images/Othello%20gameplay%20rkm.gif)
+[![gif](./images/Othello%20gameplay%20rkm.gif)](https://rahul-rkm.github.io/Othello/)
 
 1. Othello is a board game.
 2. Play against the bot.

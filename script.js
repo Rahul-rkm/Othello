@@ -1,5 +1,3 @@
-// import botMove from "./app.js";
-// botMove()
 // 1. get all the elements 
 //    header, player-points, bot-points, grid-items, modal, action-button
 const playerPoints = document.querySelector("#player-points");
@@ -11,6 +9,7 @@ const modalHeader = document.querySelector("#modal-header");
 const modalMsg = document.querySelector("#modal-msg");
 const modalAction = document.querySelector("#modal-action");
 const overlay = document.querySelector("#overlay");
+const about = document.querySelector("#about");
 
 // MODEL 📜 
 // const board = [...new Array(8).fill([...new Array(8).fill(' ')])]; 
@@ -232,6 +231,7 @@ function restartGame() {
     board[4][4] = cards[0];
     playerTurn = 0;
     scores = [2, 2];
+    modalMsg.innerHTML = '';
     modal.classList.remove('active')
     overlay.classList.remove('active');
     render();
@@ -286,6 +286,15 @@ const ClickHandler = async (e) => {
     }
 }
 
+// About handler
+const aboutHandler = () => {
+    modal.classList.add("active");
+    overlay.classList.add("active");
+    // 1. Header : built by 2. message: learn how to play. 3. close 
+    modalHeader.innerHTML = `<a href="https://www.youtube.com/watch?v=xDnYEOsjZnM" target="_blank">Learn how to play</a>`;
+    modalMsg.innerHTML = `<h3>Made by Rahul 😎</h3>`
+    modalAction.innerText = 'Close';
+}
 
 // Animate the bgcolor if innerContent changes
 function changimation(e) {
@@ -312,5 +321,6 @@ gridItems.forEach(item => {
 
 turn.addEventListener('click', changimation);
 modalAction.addEventListener('click', restartGame);
+about.addEventListener('click', aboutHandler)
 // Test
 // modal.classList.add('active');

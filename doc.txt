@@ -1,2 +1,0 @@
-1. 2D array for storing board data
-2. 

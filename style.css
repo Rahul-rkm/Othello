@@ -19,6 +19,10 @@
     margin: 0 10px;
 }
 
+#about {
+    cursor: pointer;
+}
+
 #nav-list img {
     width: 2rem;
 }

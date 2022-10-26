@@ -294,6 +294,17 @@ const aboutHandler = () => {
     modalHeader.innerHTML = `<a href="https://www.youtube.com/watch?v=xDnYEOsjZnM" target="_blank">Learn how to play</a>`;
     modalMsg.innerHTML = `<h3>Made by Rahul 😎</h3>`
     modalAction.innerText = 'Close';
+    modalAction.removeEventListener('click', restartGame);
+    modalAction.addEventListener('click', closeModal);
+}
+
+function closeModal(e) {
+    modal.classList.remove('active')
+    overlay.classList.remove('active');
+    setTimeout(() => {
+        modalAction.removeEventListener('click', closeModal);
+        modalAction.addEventListener('click', restartGame);
+    }, 1000);
 }
 
 // Animate the bgcolor if innerContent changes
